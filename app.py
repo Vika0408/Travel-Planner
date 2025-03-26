@@ -2,6 +2,18 @@ from flask import Flask, request, jsonify
 import google.generativeai as genai
 import os
 
+
+import streamlit as st
+import google.generativeai as genai
+
+# Retrieve API key from Streamlit secrets
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+
+if not GOOGLE_API_KEY:
+    st.error("Google API key is missing. Please set it in Streamlit secrets.")
+else:
+    genai.configure(api_key=GOOGLE_API_KEY)
+
 # Initialize Flask app
 app = Flask(__name__)
 
